@@ -1,0 +1,117 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 24/07/2014 08:45:43 PM by Hibernate Tools 3.6.0 -->
+<hibernate-mapping>
+    <class name="OdontoSysModelo.Paciente" table="paciente" catalog="odontosys">
+        <id name="idPaciente" type="java.lang.Integer">
+            <column name="idPaciente" />
+            <generator class="identity" />
+        </id>
+        <property name="nombres" type="string">
+            <column name="Nombres" not-null="true" />
+        </property>
+        <property name="apellidos" type="string">
+            <column name="Apellidos" not-null="true" />
+        </property>
+        <property name="nroCi" type="int">
+            <column name="Nro_CI" not-null="true" />
+        </property>
+        <property name="fechaNac" type="date">
+            <column name="Fecha_Nac" length="10" not-null="true" />
+        </property>
+        <property name="sexo" type="string">
+            <column name="Sexo" length="1" not-null="true" />
+        </property>
+        <property name="telLb" type="string">
+            <column name="Tel_LB" length="20" />
+        </property>
+        <property name="telCel" type="string">
+            <column name="Tel_Cel" length="10" />
+        </property>
+        <property name="direccion" type="string">
+            <column name="Direccion" length="500" not-null="true" />
+        </property>
+        <property name="ciudad" type="string">
+            <column name="Ciudad" length="100" not-null="true" />
+        </property>
+        <property name="email" type="string">
+            <column name="Email" length="50" />
+        </property>
+        <property name="peso" type="int">
+            <column name="Peso" not-null="true" />
+        </property>
+        <property name="enfermedades" type="string">
+            <column name="Enfermedades" length="500" not-null="true" />
+        </property>
+        <property name="medicamentos" type="string">
+            <column name="Medicamentos" length="500" not-null="true" />
+        </property>
+        <property name="alergias" type="string">
+            <column name="Alergias" length="500" not-null="true" />
+        </property>
+        <property name="cirugias" type="string">
+            <column name="Cirugias" length="500" not-null="true" />
+        </property>
+        <property name="observaciones" type="string">
+            <column name="Observaciones" length="1000" not-null="true" />
+        </property>
+        <property name="estado" type="string">
+            <column name="estado" length="8" not-null="true" />
+        </property>
+        <set name="facturas" table="factura" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="fk_paciente" not-null="true" />
+            </key>
+            <one-to-many class="OdontoSysModelo.Factura" />
+        </set>
+        <set name="agendas" table="agenda" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="fk_paciente" not-null="true" />
+            </key>
+            <one-to-many class="OdontoSysModelo.Agenda" />
+        </set>
+        <set name="ordenServicios" table="orden_servicio" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="fk_paciente" not-null="true" />
+            </key>
+            <one-to-many class="OdontoSysModelo.OrdenServicio" />
+        </set>
+        <set name="diagnosticos" table="diagnostico" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="fk_paciente" not-null="true" />
+            </key>
+            <one-to-many class="OdontoSysModelo.Diagnostico" />
+        </set>
+        <set name="movimientos" table="movimiento" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="fk_paciente" not-null="true" />
+            </key>
+            <one-to-many class="OdontoSysModelo.Movimiento" />
+        </set>
+        <set name="convenios" table="convenio" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="fk_paciente" not-null="true" />
+            </key>
+            <one-to-many class="OdontoSysModelo.Convenio" />
+        </set>
+        <set name="odontogramas" table="odontograma" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="fk_paciente" not-null="true" />
+            </key>
+            <one-to-many class="OdontoSysModelo.Odontograma" />
+        </set>
+        <set name="recibos" table="recibo" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="fk_paciente" not-null="true" />
+            </key>
+            <one-to-many class="OdontoSysModelo.Recibo" />
+        </set>
+        <set name="notaCreditos" table="nota_credito" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="fk_paciente" not-null="true" />
+            </key>
+            <one-to-many class="OdontoSysModelo.NotaCredito" />
+        </set>
+    </class>
+</hibernate-mapping>

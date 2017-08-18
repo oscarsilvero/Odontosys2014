@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 24/07/2014 08:45:43 PM by Hibernate Tools 3.6.0 -->
+<hibernate-mapping>
+    <class name="OdontoSysModelo.DetalleNota" table="detalle_nota" catalog="odontosys">
+        <id name="iddetalleNota" type="java.lang.Integer">
+            <column name="iddetalle_nota" />
+            <generator class="identity" />
+        </id>
+        <many-to-one name="notaCredito" class="OdontoSysModelo.NotaCredito" fetch="select">
+            <column name="fk_notac" not-null="true" />
+        </many-to-one>
+        <property name="descripcion" type="string">
+            <column name="descripcion" length="70" not-null="true" />
+        </property>
+        <property name="monto" type="int">
+            <column name="monto" not-null="true" />
+        </property>
+    </class>
+</hibernate-mapping>

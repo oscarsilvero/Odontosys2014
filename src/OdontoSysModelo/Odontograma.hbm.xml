@@ -1,0 +1,48 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 24/07/2014 08:45:43 PM by Hibernate Tools 3.6.0 -->
+<hibernate-mapping>
+    <class name="OdontoSysModelo.Odontograma" table="odontograma" catalog="odontosys">
+        <id name="idodontograma" type="java.lang.Integer">
+            <column name="idodontograma" />
+            <generator class="identity" />
+        </id>
+        <many-to-one name="paciente" class="OdontoSysModelo.Paciente" fetch="select">
+            <column name="fk_paciente" not-null="true" />
+        </many-to-one>
+        <many-to-one name="doctor" class="OdontoSysModelo.Doctor" fetch="select">
+            <column name="fk_doctor" not-null="true" />
+        </many-to-one>
+        <property name="fecha" type="date">
+            <column name="fecha" length="10" not-null="true" />
+        </property>
+        <property name="tipo" type="string">
+            <column name="tipo" length="20" not-null="true" />
+        </property>
+        <set name="diagnosticos" table="diagnostico" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="fk_odontog_examen" />
+            </key>
+            <one-to-many class="OdontoSysModelo.Diagnostico" />
+        </set>
+        <set name="ordenServicios" table="orden_servicio" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="fk_odontograma" not-null="true" />
+            </key>
+            <one-to-many class="OdontoSysModelo.OrdenServicio" />
+        </set>
+        <set name="detalleHallazgos" table="detalle_hallazgo" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="fk_odontograma" not-null="true" />
+            </key>
+            <one-to-many class="OdontoSysModelo.DetalleHallazgo" />
+        </set>
+        <set name="tratamientos" table="tratamiento" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="fk_odontograma" not-null="true" />
+            </key>
+            <one-to-many class="OdontoSysModelo.Tratamiento" />
+        </set>
+    </class>
+</hibernate-mapping>

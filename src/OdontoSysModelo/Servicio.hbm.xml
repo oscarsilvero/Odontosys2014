@@ -1,0 +1,45 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 24/07/2014 08:45:43 PM by Hibernate Tools 3.6.0 -->
+<hibernate-mapping>
+    <class name="OdontoSysModelo.Servicio" table="servicio" catalog="odontosys">
+        <id name="idservicio" type="java.lang.Integer">
+            <column name="idservicio" />
+            <generator class="identity" />
+        </id>
+        <property name="descripcion" type="string">
+            <column name="descripcion" not-null="true" />
+        </property>
+        <property name="precio" type="int">
+            <column name="precio" not-null="true" />
+        </property>
+        <property name="estado" type="string">
+            <column name="estado" length="20" not-null="true" />
+        </property>
+        <set name="detalleOrdens" table="detalle_orden" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="fk_servicio" not-null="true" />
+            </key>
+            <one-to-many class="OdontoSysModelo.DetalleOrden" />
+        </set>
+        <set name="convenios" table="convenio" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="fk_servicio" not-null="true" />
+            </key>
+            <one-to-many class="OdontoSysModelo.Convenio" />
+        </set>
+        <set name="agendas" table="agenda" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="motivo" not-null="true" />
+            </key>
+            <one-to-many class="OdontoSysModelo.Agenda" />
+        </set>
+        <set name="tratamientos" table="tratamiento" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="fk_servicio" not-null="true" />
+            </key>
+            <one-to-many class="OdontoSysModelo.Tratamiento" />
+        </set>
+    </class>
+</hibernate-mapping>

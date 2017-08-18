@@ -1,0 +1,42 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 24/07/2014 08:45:43 PM by Hibernate Tools 3.6.0 -->
+<hibernate-mapping>
+    <class name="OdontoSysModelo.MovimientoEmpresa" table="movimiento_empresa" catalog="odontosys">
+        <id name="idmovimientoEmpresa" type="java.lang.Integer">
+            <column name="idmovimiento_empresa" />
+            <generator class="identity" />
+        </id>
+        <many-to-one name="reciboEmpresa" class="OdontoSysModelo.ReciboEmpresa" fetch="select">
+            <column name="fk_recibo" />
+        </many-to-one>
+        <many-to-one name="facturaEmpresa" class="OdontoSysModelo.FacturaEmpresa" fetch="select">
+            <column name="fk_factura" />
+        </many-to-one>
+        <many-to-one name="empresa" class="OdontoSysModelo.Empresa" fetch="select">
+            <column name="fk_empresa" not-null="true" />
+        </many-to-one>
+        <many-to-one name="notaCreditoEmpresa" class="OdontoSysModelo.NotaCreditoEmpresa" fetch="select">
+            <column name="fk_nota" />
+        </many-to-one>
+        <property name="fecha" type="date">
+            <column name="fecha" length="10" not-null="true" />
+        </property>
+        <property name="movimiento" type="string">
+            <column name="movimiento" length="100" not-null="true" />
+        </property>
+        <property name="debe" type="int">
+            <column name="debe" not-null="true" />
+        </property>
+        <property name="haber" type="int">
+            <column name="haber" not-null="true" />
+        </property>
+        <set name="cajas" table="caja" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="fk_mov_empresa" />
+            </key>
+            <one-to-many class="OdontoSysModelo.Caja" />
+        </set>
+    </class>
+</hibernate-mapping>

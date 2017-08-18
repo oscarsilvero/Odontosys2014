@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 24/07/2014 08:45:43 PM by Hibernate Tools 3.6.0 -->
+<hibernate-mapping>
+    <class name="OdontoSysModelo.DetalleOrden" table="detalle_orden" catalog="odontosys">
+        <id name="iddetalleOrden" type="java.lang.Integer">
+            <column name="iddetalle_orden" />
+            <generator class="identity" />
+        </id>
+        <many-to-one name="servicio" class="OdontoSysModelo.Servicio" fetch="select">
+            <column name="fk_servicio" not-null="true" />
+        </many-to-one>
+        <many-to-one name="ordenServicio" class="OdontoSysModelo.OrdenServicio" fetch="select">
+            <column name="fk_orden_servicio" not-null="true" />
+        </many-to-one>
+        <property name="precio" type="int">
+            <column name="precio" not-null="true" />
+        </property>
+    </class>
+</hibernate-mapping>

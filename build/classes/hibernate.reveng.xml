@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-reverse-engineering PUBLIC "-//Hibernate/Hibernate Reverse Engineering DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-reverse-engineering-3.0.dtd">
+<hibernate-reverse-engineering>
+  <schema-selection match-catalog="odontosys"/>
+  <table-filter match-name="movimiento"/>
+  <table-filter match-name="tratamiento"/>
+  <table-filter match-name="detalle_nota_emp"/>
+  <table-filter match-name="diagnostico"/>
+  <table-filter match-name="factura_empresa"/>
+  <table-filter match-name="usuario"/>
+  <table-filter match-name="recibo_empresa"/>
+  <table-filter match-name="empresa"/>
+  <table-filter match-name="odontograma"/>
+  <table-filter match-name="doctor"/>
+  <table-filter match-name="nota_credito_empresa"/>
+  <table-filter match-name="factura_convenio"/>
+  <table-filter match-name="hallazgo"/>
+  <table-filter match-name="nota_credito"/>
+  <table-filter match-name="diente"/>
+  <table-filter match-name="convenio"/>
+  <table-filter match-name="detalle_nota"/>
+  <table-filter match-name="detalle_orden"/>
+  <table-filter match-name="detalle_recibo"/>
+  <table-filter match-name="servicio"/>
+  <table-filter match-name="factura"/>
+  <table-filter match-name="paciente"/>
+  <table-filter match-name="detalle_hallazgo"/>
+  <table-filter match-name="orden_servicio"/>
+  <table-filter match-name="detalle_reciboemp"/>
+  <table-filter match-name="movimiento_empresa"/>
+  <table-filter match-name="recibo"/>
+  <table-filter match-name="caja"/>
+  <table-filter match-name="agenda"/>
+</hibernate-reverse-engineering>

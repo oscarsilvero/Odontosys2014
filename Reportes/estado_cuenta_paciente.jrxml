@@ -1,0 +1,390 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="estado_cuenta_paciente" language="groovy" pageWidth="600" pageHeight="500" columnWidth="560" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="8872015c-8cf2-4457-84ea-b70d942f40d3">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<property name="ireport.callouts" value="##Tue Jul 08 13:07:46 PYT 2014"/>
+	<parameter name="id_paciente" class="java.lang.Integer">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="fecha_ini" class="java.util.Date">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="fecha_fin" class="java.util.Date">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="saldo_ini" class="java.lang.Integer">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<queryString>
+		<![CDATA[SELECT
+     paciente.`Nombres` AS paciente_Nombres,
+     paciente.`Apellidos` AS paciente_Apellidos,
+     paciente.`Nro_CI` AS paciente_Nro_CI,
+     movimiento.`fecha` AS movimiento_fecha,
+     movimiento.`movimiento` AS movimiento_movimiento,
+     movimiento.`debe` AS movimiento_debe,
+     movimiento.`haber` AS movimiento_haber
+FROM
+     `paciente` paciente INNER JOIN `movimiento` movimiento ON paciente.`idPaciente` = movimiento.`fk_paciente`
+WHERE
+     paciente.`idPaciente` = $P{id_paciente} AND
+     movimiento.`fecha` BETWEEN $P{fecha_ini} AND $P{fecha_fin}
+ORDER BY
+     movimiento.`fecha`]]>
+	</queryString>
+	<field name="paciente_Nombres" class="java.lang.String"/>
+	<field name="paciente_Apellidos" class="java.lang.String"/>
+	<field name="paciente_Nro_CI" class="java.lang.Integer"/>
+	<field name="movimiento_fecha" class="java.sql.Date"/>
+	<field name="movimiento_movimiento" class="java.lang.String"/>
+	<field name="movimiento_debe" class="java.lang.Integer"/>
+	<field name="movimiento_haber" class="java.lang.Integer"/>
+	<variable name="movimiento_debe_1" class="java.lang.Integer" resetType="Column" calculation="Sum">
+		<variableExpression><![CDATA[$F{movimiento_debe}]]></variableExpression>
+	</variable>
+	<variable name="movimiento_haber_1" class="java.lang.Integer" resetType="Column" calculation="Sum">
+		<variableExpression><![CDATA[$F{movimiento_haber}]]></variableExpression>
+	</variable>
+	<variable name="saldo" class="java.lang.String"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="79" splitType="Stretch">
+			<rectangle>
+				<reportElement x="-20" y="-20" width="599" height="99" backcolor="#006699" uuid="93c3b01b-dd3f-4469-aa6e-18ca54875072"/>
+			</rectangle>
+			<staticText>
+				<reportElement x="-1" y="0" width="561" height="52" forecolor="#FFFFFF" uuid="993a1dd0-a8c5-4658-a73e-418ad0cba4c9"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font size="34" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Estado de Cuenta del Paciente]]></text>
+			</staticText>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="25" splitType="Stretch">
+			<staticText>
+				<reportElement mode="Opaque" x="404" y="0" width="55" height="25" forecolor="#006699" backcolor="#EEEDFF" uuid="cb0e9c5a-37dc-4389-92ba-4841edb74e78"/>
+				<box>
+					<topPen lineWidth="0.25"/>
+					<leftPen lineWidth="0.25"/>
+					<bottomPen lineWidth="0.25"/>
+					<rightPen lineWidth="0.25"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="13" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Hasta]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="263" y="0" width="55" height="25" forecolor="#006699" backcolor="#EEEDFF" uuid="40235521-01da-4c8c-b577-02badf154b7c"/>
+				<box>
+					<topPen lineWidth="0.25"/>
+					<leftPen lineWidth="0.25"/>
+					<bottomPen lineWidth="0.25"/>
+					<rightPen lineWidth="0.25"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="13" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Desde]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="0" y="0" width="76" height="25" forecolor="#006699" backcolor="#EEEDFF" uuid="a904ce2d-c609-43bf-a8d0-12567f3ffd4a"/>
+				<box>
+					<topPen lineWidth="0.25"/>
+					<leftPen lineWidth="0.25"/>
+					<bottomPen lineWidth="0.25"/>
+					<rightPen lineWidth="0.25"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="13" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Paciente]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="79" y="0" width="100" height="25" uuid="b1e05f29-85f2-44b1-90d5-7db26c7aeeec"/>
+				<box>
+					<pen lineWidth="0.25"/>
+					<topPen lineWidth="0.25"/>
+					<leftPen lineWidth="0.0"/>
+					<bottomPen lineWidth="0.25"/>
+					<rightPen lineWidth="0.0"/>
+				</box>
+				<textElement verticalAlignment="Middle">
+					<paragraph leftIndent="1"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{paciente_Nombres}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="130" y="0" width="133" height="25" uuid="b762cf88-7061-420f-afcb-b55a87060be3"/>
+				<box>
+					<pen lineWidth="0.25"/>
+					<topPen lineWidth="0.25"/>
+					<leftPen lineWidth="0.0"/>
+					<bottomPen lineWidth="0.25"/>
+					<rightPen lineWidth="0.0"/>
+				</box>
+				<textElement verticalAlignment="Middle">
+					<paragraph leftIndent="1"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{paciente_Apellidos}]]></textFieldExpression>
+			</textField>
+			<textField pattern="dd/MM/yyyy">
+				<reportElement x="318" y="0" width="86" height="25" uuid="c068eb53-ea79-4deb-ac6a-6f3a701fdf8b"/>
+				<textElement verticalAlignment="Middle">
+					<paragraph leftIndent="2"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{fecha_ini}]]></textFieldExpression>
+			</textField>
+			<textField pattern="dd/MM/yyyy">
+				<reportElement x="460" y="0" width="100" height="25" uuid="bdd58d7c-7866-49e7-916c-f4057ed7e989"/>
+				<box>
+					<pen lineWidth="0.25"/>
+					<topPen lineWidth="0.25"/>
+					<leftPen lineWidth="0.25"/>
+					<bottomPen lineWidth="0.25"/>
+					<rightPen lineWidth="0.25"/>
+				</box>
+				<textElement verticalAlignment="Middle">
+					<paragraph leftIndent="2"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{fecha_fin}]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageHeader>
+	<columnHeader>
+		<band height="50" splitType="Stretch">
+			<staticText>
+				<reportElement x="0" y="0" width="100" height="30" backcolor="#E6E6E6" uuid="bdbae0fb-e14f-497b-9792-52b689965ff9"/>
+				<box>
+					<pen lineWidth="0.5" lineStyle="Solid"/>
+					<topPen lineWidth="0.5" lineStyle="Solid"/>
+					<leftPen lineWidth="0.5" lineStyle="Solid"/>
+					<bottomPen lineWidth="0.5" lineStyle="Solid"/>
+					<rightPen lineWidth="0.5" lineStyle="Solid"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="13" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Fecha]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="99" y="0" width="262" height="30" backcolor="#E6E6E6" uuid="ef772fdc-fb0f-4878-964c-76ce04263ffe"/>
+				<box>
+					<pen lineWidth="0.5" lineStyle="Solid"/>
+					<topPen lineWidth="0.5" lineStyle="Solid"/>
+					<leftPen lineWidth="0.5" lineStyle="Solid"/>
+					<bottomPen lineWidth="0.5" lineStyle="Solid"/>
+					<rightPen lineWidth="0.5" lineStyle="Solid"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="13" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Descripción]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="361" y="0" width="100" height="30" backcolor="#E6E6E6" uuid="229c7097-56ad-4a46-b4c6-51544a0e8c57"/>
+				<box>
+					<pen lineWidth="0.5" lineStyle="Solid"/>
+					<topPen lineWidth="0.5" lineStyle="Solid"/>
+					<leftPen lineWidth="0.5" lineStyle="Solid"/>
+					<bottomPen lineWidth="0.5" lineStyle="Solid"/>
+					<rightPen lineWidth="0.5" lineStyle="Solid"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="13" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Debe]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="460" y="0" width="100" height="30" backcolor="#E6E6E6" uuid="5dd82c75-d242-44e9-8407-6f3c933423bb"/>
+				<box>
+					<pen lineWidth="0.5" lineStyle="Solid"/>
+					<topPen lineWidth="0.5" lineStyle="Solid"/>
+					<leftPen lineWidth="0.5" lineStyle="Solid"/>
+					<bottomPen lineWidth="0.5" lineStyle="Solid"/>
+					<rightPen lineWidth="0.5" lineStyle="Solid"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="13" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Haber]]></text>
+			</staticText>
+			<textField pattern="#,##0">
+				<reportElement x="460" y="30" width="100" height="20" uuid="74d69e43-47c0-4372-8015-f7b98bd19c43"/>
+				<box>
+					<pen lineWidth="0.25"/>
+					<topPen lineWidth="0.25"/>
+					<leftPen lineWidth="0.25"/>
+					<bottomPen lineWidth="0.25"/>
+					<rightPen lineWidth="0.25"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[0]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0">
+				<reportElement x="361" y="30" width="100" height="20" uuid="fe663cfd-2b76-4ae1-9568-fad8cc045f8b"/>
+				<box>
+					<pen lineWidth="0.25"/>
+					<topPen lineWidth="0.25"/>
+					<leftPen lineWidth="0.25"/>
+					<bottomPen lineWidth="0.25"/>
+					<rightPen lineWidth="0.25"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<paragraph leftIndent="2"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{saldo_ini}.intValue()]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="0" y="30" width="100" height="20" uuid="9e3d877c-a548-4ebe-a2af-adc0bc0ce633"/>
+				<box>
+					<pen lineWidth="0.25"/>
+					<topPen lineWidth="0.25"/>
+					<leftPen lineWidth="0.25"/>
+					<bottomPen lineWidth="0.25"/>
+					<rightPen lineWidth="0.25"/>
+				</box>
+				<text><![CDATA[]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="99" y="30" width="262" height="20" uuid="5e4107bb-ff8c-446f-8981-2b606dc27240"/>
+				<box>
+					<pen lineWidth="0.25"/>
+					<topPen lineWidth="0.25"/>
+					<leftPen lineWidth="0.25"/>
+					<bottomPen lineWidth="0.25"/>
+					<rightPen lineWidth="0.25"/>
+				</box>
+				<textElement verticalAlignment="Middle">
+					<paragraph leftIndent="2"/>
+				</textElement>
+				<text><![CDATA[Saldo Inicial]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="20">
+			<textField pattern="dd/MM/yyyy">
+				<reportElement x="0" y="0" width="100" height="20" uuid="d5002173-7ab1-47ab-9d15-e2af2e23b110"/>
+				<box>
+					<pen lineWidth="0.25"/>
+					<topPen lineWidth="0.25"/>
+					<leftPen lineWidth="0.25"/>
+					<bottomPen lineWidth="0.25"/>
+					<rightPen lineWidth="0.25"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{movimiento_fecha}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="99" y="0" width="262" height="20" uuid="dfbb7090-5bde-490d-a093-756490ec4923"/>
+				<box>
+					<pen lineWidth="0.25"/>
+					<topPen lineWidth="0.25"/>
+					<leftPen lineWidth="0.25"/>
+					<bottomPen lineWidth="0.25"/>
+					<rightPen lineWidth="0.25"/>
+				</box>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<paragraph leftIndent="2"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{movimiento_movimiento}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0">
+				<reportElement x="361" y="0" width="100" height="20" uuid="81785374-38cb-4a99-86b7-301d20e4863c"/>
+				<box>
+					<pen lineWidth="0.25"/>
+					<topPen lineWidth="0.25"/>
+					<leftPen lineWidth="0.25"/>
+					<bottomPen lineWidth="0.25"/>
+					<rightPen lineWidth="0.25"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{movimiento_debe}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0">
+				<reportElement x="460" y="0" width="100" height="20" uuid="d0f33e15-4e4f-4b77-8cc4-7643f2b5dd0a"/>
+				<box>
+					<pen lineWidth="0.25"/>
+					<topPen lineWidth="0.25"/>
+					<leftPen lineWidth="0.25"/>
+					<bottomPen lineWidth="0.25"/>
+					<rightPen lineWidth="0.25"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{movimiento_haber}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="50">
+			<staticText>
+				<reportElement mode="Opaque" x="0" y="0" width="359" height="25" forecolor="#006699" backcolor="#EEEDFF" uuid="a754c692-01e1-4659-9522-4eb3382a3e33"/>
+				<box>
+					<topPen lineWidth="0.25"/>
+					<leftPen lineWidth="0.25"/>
+					<bottomPen lineWidth="0.25"/>
+					<rightPen lineWidth="0.25"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="13" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Totales]]></text>
+			</staticText>
+			<textField pattern="#,##0">
+				<reportElement x="360" y="0" width="100" height="25" uuid="18354589-e118-4a4a-8521-604862cb7761"/>
+				<box>
+					<pen lineWidth="0.25" lineStyle="Double"/>
+					<topPen lineWidth="0.25" lineStyle="Double"/>
+					<leftPen lineWidth="0.25" lineStyle="Double"/>
+					<bottomPen lineWidth="0.25" lineStyle="Double"/>
+					<rightPen lineWidth="0.25" lineStyle="Double"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$V{movimiento_debe_1}.intValue() + $P{saldo_ini}.intValue()]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0">
+				<reportElement x="460" y="0" width="100" height="25" uuid="5257e8fd-5f23-4b9a-9f8f-ae91f9459651"/>
+				<box>
+					<pen lineWidth="0.25" lineStyle="Double"/>
+					<topPen lineWidth="0.25" lineStyle="Double"/>
+					<leftPen lineWidth="0.25" lineStyle="Double"/>
+					<bottomPen lineWidth="0.25" lineStyle="Double"/>
+					<rightPen lineWidth="0.25" lineStyle="Double"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$V{movimiento_haber_1}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement mode="Opaque" x="0" y="24" width="359" height="25" forecolor="#006699" backcolor="#EEEDFF" uuid="9eed7ceb-5e9e-4d5c-ad09-473cba5c4f3e"/>
+				<box>
+					<topPen lineWidth="0.25"/>
+					<leftPen lineWidth="0.25"/>
+					<bottomPen lineWidth="0.25"/>
+					<rightPen lineWidth="0.25"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="13" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Saldo]]></text>
+			</staticText>
+			<textField pattern="#,##0">
+				<reportElement x="359" y="24" width="201" height="25" uuid="fb1001d2-81c9-4206-961d-9f3bb84c620d"/>
+				<box>
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$V{movimiento_debe_1}.intValue() - $V{movimiento_haber_1}.intValue() + $P{saldo_ini}.intValue()]]></textFieldExpression>
+			</textField>
+		</band>
+	</columnFooter>
+</jasperReport>

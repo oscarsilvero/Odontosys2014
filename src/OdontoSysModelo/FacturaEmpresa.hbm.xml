@@ -1,0 +1,63 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 24/07/2014 08:45:43 PM by Hibernate Tools 3.6.0 -->
+<hibernate-mapping>
+    <class name="OdontoSysModelo.FacturaEmpresa" table="factura_empresa" catalog="odontosys">
+        <id name="idfacturaEmpresa" type="java.lang.Integer">
+            <column name="idfactura_empresa" />
+            <generator class="identity" />
+        </id>
+        <many-to-one name="empresa" class="OdontoSysModelo.Empresa" fetch="select">
+            <column name="fk_empresa" not-null="true" />
+        </many-to-one>
+        <property name="fecha" type="date">
+            <column name="fecha" length="10" not-null="true" />
+        </property>
+        <property name="tipo" type="string">
+            <column name="tipo" length="45" not-null="true" />
+        </property>
+        <property name="timbrado" type="string">
+            <column name="timbrado" length="45" not-null="true" />
+        </property>
+        <property name="nroFactura" type="string">
+            <column name="nroFactura" length="45" not-null="true" />
+        </property>
+        <property name="descuento" type="java.lang.Integer">
+            <column name="descuento" />
+        </property>
+        <property name="estado" type="string">
+            <column name="estado" length="45" not-null="true" />
+        </property>
+        <property name="saldo" type="java.lang.Integer">
+            <column name="saldo" />
+        </property>
+        <property name="montoTotal" type="int">
+            <column name="montoTotal" not-null="true" />
+        </property>
+        <set name="notaCreditoEmpresas" table="nota_credito_empresa" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="fk_facturaemp" not-null="true" />
+            </key>
+            <one-to-many class="OdontoSysModelo.NotaCreditoEmpresa" />
+        </set>
+        <set name="movimientoEmpresas" table="movimiento_empresa" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="fk_factura" />
+            </key>
+            <one-to-many class="OdontoSysModelo.MovimientoEmpresa" />
+        </set>
+        <set name="facturaConvenios" table="factura_convenio" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="fk_facturaemp" />
+            </key>
+            <one-to-many class="OdontoSysModelo.FacturaConvenio" />
+        </set>
+        <set name="reciboEmpresas" table="recibo_empresa" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="fk_facturaemp" not-null="true" />
+            </key>
+            <one-to-many class="OdontoSysModelo.ReciboEmpresa" />
+        </set>
+    </class>
+</hibernate-mapping>

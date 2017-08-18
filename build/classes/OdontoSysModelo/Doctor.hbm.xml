@@ -1,0 +1,72 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 24/07/2014 08:45:43 PM by Hibernate Tools 3.6.0 -->
+<hibernate-mapping>
+    <class name="OdontoSysModelo.Doctor" table="doctor" catalog="odontosys">
+        <id name="idDoctor" type="java.lang.Integer">
+            <column name="idDoctor" />
+            <generator class="identity" />
+        </id>
+        <property name="nombre" type="string">
+            <column name="Nombre" not-null="true" />
+        </property>
+        <property name="apellido" type="string">
+            <column name="Apellido" not-null="true" />
+        </property>
+        <property name="nroCi" type="int">
+            <column name="Nro_CI" not-null="true" />
+        </property>
+        <property name="fechaNac" type="date">
+            <column name="Fecha_Nac" length="10" not-null="true" />
+        </property>
+        <property name="sexo" type="string">
+            <column name="Sexo" length="1" not-null="true" />
+        </property>
+        <property name="teLb" type="string">
+            <column name="Te_LB" length="20" />
+        </property>
+        <property name="telCel" type="string">
+            <column name="Tel_Cel" length="10" />
+        </property>
+        <property name="direccion" type="string">
+            <column name="Direccion" length="500" not-null="true" />
+        </property>
+        <property name="ciudad" type="string">
+            <column name="Ciudad" length="50" not-null="true" />
+        </property>
+        <property name="email" type="string">
+            <column name="Email" length="50" />
+        </property>
+        <property name="regProf" type="string">
+            <column name="Reg_Prof" length="50" not-null="true" />
+        </property>
+        <property name="estado" type="string">
+            <column name="estado" length="8" />
+        </property>
+        <set name="agendas" table="agenda" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="fk_doctor" not-null="true" />
+            </key>
+            <one-to-many class="OdontoSysModelo.Agenda" />
+        </set>
+        <set name="usuarios" table="usuario" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="id_asoc" />
+            </key>
+            <one-to-many class="OdontoSysModelo.Usuario" />
+        </set>
+        <set name="diagnosticos" table="diagnostico" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="fk_doctor" not-null="true" />
+            </key>
+            <one-to-many class="OdontoSysModelo.Diagnostico" />
+        </set>
+        <set name="odontogramas" table="odontograma" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="fk_doctor" not-null="true" />
+            </key>
+            <one-to-many class="OdontoSysModelo.Odontograma" />
+        </set>
+    </class>
+</hibernate-mapping>

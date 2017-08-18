@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-configuration PUBLIC "-//Hibernate/Hibernate Configuration DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-configuration-3.0.dtd">
+<hibernate-configuration>
+  <session-factory>
+    <property name="hibernate.dialect">org.hibernate.dialect.MySQLDialect</property>
+    <property name="hibernate.connection.driver_class">com.mysql.jdbc.Driver</property>
+    <property name="hibernate.connection.url">jdbc:mysql://localhost:3306/odontosys?zeroDateTimeBehavior=convertToNull</property>
+    <property name="hibernate.connection.username">root</property>
+    <property name="hibernate.connection.password">odontosys</property>
+    <mapping resource="OdontoSysModelo/NotaCredito.hbm.xml"/>
+    <mapping resource="OdontoSysModelo/OrdenServicio.hbm.xml"/>
+    <mapping resource="OdontoSysModelo/Servicio.hbm.xml"/>
+    <mapping resource="OdontoSysModelo/DetalleHallazgo.hbm.xml"/>
+    <mapping resource="OdontoSysModelo/DetalleOrden.hbm.xml"/>
+    <mapping resource="OdontoSysModelo/FacturaConvenio.hbm.xml"/>
+    <mapping resource="OdontoSysModelo/DetalleRecibo.hbm.xml"/>
+    <mapping resource="OdontoSysModelo/ReciboEmpresa.hbm.xml"/>
+    <mapping resource="OdontoSysModelo/Agenda.hbm.xml"/>
+    <mapping resource="OdontoSysModelo/Diente.hbm.xml"/>
+    <mapping resource="OdontoSysModelo/Movimiento.hbm.xml"/>
+    <mapping resource="OdontoSysModelo/Diagnostico.hbm.xml"/>
+    <mapping resource="OdontoSysModelo/Factura.hbm.xml"/>
+    <mapping resource="OdontoSysModelo/Hallazgo.hbm.xml"/>
+    <mapping resource="OdontoSysModelo/Convenio.hbm.xml"/>
+    <mapping resource="OdontoSysModelo/Paciente.hbm.xml"/>
+    <mapping resource="OdontoSysModelo/DetalleNota.hbm.xml"/>
+    <mapping resource="OdontoSysModelo/Tratamiento.hbm.xml"/>
+    <mapping resource="OdontoSysModelo/Empresa.hbm.xml"/>
+    <mapping resource="OdontoSysModelo/Doctor.hbm.xml"/>
+    <mapping resource="OdontoSysModelo/FacturaEmpresa.hbm.xml"/>
+    <mapping resource="OdontoSysModelo/DetalleReciboemp.hbm.xml"/>
+    <mapping resource="OdontoSysModelo/MovimientoEmpresa.hbm.xml"/>
+    <mapping resource="OdontoSysModelo/NotaCreditoEmpresa.hbm.xml"/>
+    <mapping resource="OdontoSysModelo/Caja.hbm.xml"/>
+    <mapping resource="OdontoSysModelo/Usuario.hbm.xml"/>
+    <mapping resource="OdontoSysModelo/Odontograma.hbm.xml"/>
+    <mapping resource="OdontoSysModelo/DetalleNotaEmp.hbm.xml"/>
+    <mapping resource="OdontoSysModelo/Recibo.hbm.xml"/>
+  </session-factory>
+</hibernate-configuration>

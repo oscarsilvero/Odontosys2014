@@ -1,0 +1,30 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 24/07/2014 08:45:43 PM by Hibernate Tools 3.6.0 -->
+<hibernate-mapping>
+    <class name="OdontoSysModelo.Convenio" table="convenio" catalog="odontosys">
+        <id name="idconvenio" type="java.lang.Integer">
+            <column name="idconvenio" />
+            <generator class="identity" />
+        </id>
+        <many-to-one name="empresa" class="OdontoSysModelo.Empresa" fetch="select">
+            <column name="fk_empresa" not-null="true" />
+        </many-to-one>
+        <many-to-one name="servicio" class="OdontoSysModelo.Servicio" fetch="select">
+            <column name="fk_servicio" not-null="true" />
+        </many-to-one>
+        <many-to-one name="paciente" class="OdontoSysModelo.Paciente" fetch="select">
+            <column name="fk_paciente" not-null="true" />
+        </many-to-one>
+        <property name="porcentaje" type="int">
+            <column name="porcentaje" not-null="true" />
+        </property>
+        <property name="observacion" type="string">
+            <column name="observacion" length="200" />
+        </property>
+        <property name="estado" type="string">
+            <column name="estado" length="8" not-null="true" />
+        </property>
+    </class>
+</hibernate-mapping>

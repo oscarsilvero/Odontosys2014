@@ -1,0 +1,54 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 24/07/2014 08:45:43 PM by Hibernate Tools 3.6.0 -->
+<hibernate-mapping>
+    <class name="OdontoSysModelo.Usuario" table="usuario" catalog="odontosys">
+        <id name="idusuario" type="java.lang.Integer">
+            <column name="idusuario" />
+            <generator class="identity" />
+        </id>
+        <many-to-one name="doctor" class="OdontoSysModelo.Doctor" fetch="select">
+            <column name="id_asoc" />
+        </many-to-one>
+        <property name="nombre" type="string">
+            <column name="nombre" length="50" not-null="true" />
+        </property>
+        <property name="passw" type="string">
+            <column name="passw" length="50" not-null="true" />
+        </property>
+        <property name="rol" type="string">
+            <column name="rol" length="45" not-null="true" />
+        </property>
+        <property name="estado" type="string">
+            <column name="estado" length="45" not-null="true" />
+        </property>
+        <property name="observacion" type="string">
+            <column name="observacion" length="100" />
+        </property>
+        <set name="reciboEmpresas" table="recibo_empresa" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="fk_usuario" not-null="true" />
+            </key>
+            <one-to-many class="OdontoSysModelo.ReciboEmpresa" />
+        </set>
+        <set name="notaCreditos" table="nota_credito" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="fk_usuario" not-null="true" />
+            </key>
+            <one-to-many class="OdontoSysModelo.NotaCredito" />
+        </set>
+        <set name="notaCreditoEmpresas" table="nota_credito_empresa" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="fk_usuario" not-null="true" />
+            </key>
+            <one-to-many class="OdontoSysModelo.NotaCreditoEmpresa" />
+        </set>
+        <set name="recibos" table="recibo" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="fk_usuario" not-null="true" />
+            </key>
+            <one-to-many class="OdontoSysModelo.Recibo" />
+        </set>
+    </class>
+</hibernate-mapping>
